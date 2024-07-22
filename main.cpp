@@ -1,25 +1,22 @@
-#include "raylib-cpp.hpp"
+#include <string>
+#include "Window.h"
+
 
 int main() {
     int screenWidth = 800;
     int screenHeight = 450;
+    std::string title("raylib-cpp - basic window");
+    int fps = 60;
 
-    raylib::Window window(screenWidth, screenHeight, "raylib-cpp - basic window");
+
+    Window window(screenWidth, screenHeight, title, fps);
     //raylib::Texture logo("raylib_logo.png");
 
-    SetTargetFPS(60);
+    //SetTargetFPS(60);
 
     while (!window.ShouldClose())
     {
-        BeginDrawing();
-
-        window.ClearBackground(RAYWHITE);
-
-        DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
-
-       
-
-        EndDrawing();
+        window.Render();
     }
 
     // UnloadTexture() and CloseWindow() are called automatically.

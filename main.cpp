@@ -3,10 +3,10 @@
 
 
 int main() {
-    int screenWidth = 800;
-    int screenHeight = 450;
+    constexpr int screenWidth = 800;
+    constexpr int screenHeight = 450;
     std::string title("raylib-cpp - basic window");
-    int fps = 60;
+    constexpr int fps = 60;
 
 
     Window window(screenWidth, screenHeight, title, fps);

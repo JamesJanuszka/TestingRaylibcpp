@@ -1,6 +1,6 @@
 #include "Window.h"
 
-Window::Window(int width, int height, std::string title, int fps)
+Window::Window(int width, int height, const std::string& title, int fps)
 {
 	window.Init(width, height, title);
 	SetTargetFPS(fps);
@@ -19,7 +19,7 @@ void Window::Render()
 	EndDrawing();
 }
 
-bool Window::ShouldClose()
+bool Window::ShouldClose() const
 {
 	return window.ShouldClose();
 }

@@ -5,9 +5,9 @@
 class Window
 {
 public:
-	Window(int width, int height, std::string title, int fps);
+	Window(int width, int height, const std::string& title, int fps);
 	void Render();
-	bool ShouldClose();
+	bool ShouldClose() const;
 
 private:
 	raylib::Window window;

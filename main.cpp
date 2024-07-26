@@ -16,6 +16,7 @@ int main() {
 
     while (!window.ShouldClose())
     {
+        window.Update();
         window.Render();
     }
 

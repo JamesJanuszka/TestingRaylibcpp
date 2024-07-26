@@ -18,7 +18,7 @@ Window::Window(int width, int height, const std::string& title, int fps)
 
 void Window::Update()
 {
-
+	camera.Update(CAMERA_FREE);
 }
 
 void Window::Render()

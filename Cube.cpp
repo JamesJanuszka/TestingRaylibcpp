@@ -14,5 +14,6 @@ Cube::~Cube()
 
 void Cube::Draw()
 {
-	DrawCubeV(position, size, colour);
+	//DrawCubeV(position, size, colour);
+	position.DrawCube(size, colour);
 }

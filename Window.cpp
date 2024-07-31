@@ -1,6 +1,6 @@
 #include "Window.h"
 
-Window::Window(int width, int height, const std::string& title, int fps) : shader (0)
+Window::Window(int width, int height, const std::string& title, int fps) : shader (0), cube ()
 {
 	window.Init(width, height, title);
 	SetTargetFPS(fps);
@@ -11,8 +11,9 @@ Window::Window(int width, int height, const std::string& title, int fps) : shade
 	camera.SetProjection(CAMERA_PERSPECTIVE);
 	raylib::Vector3 position{ 0.0f,0.5f,0.0f };
 	raylib::Vector3 size{ 1.0f,1.0f,1.0f };
-	raylib::Color colour = GREEN;
+	raylib::Color colour = WHITE;
 	cube = Cube (position, size, colour);
+	
 
 	std::filesystem::path vertex_shader = "./resources/shaders/basic_lighting.vert";
 	std::filesystem::path fragment_shader = "./resources/shaders/basic_lighting.frag";
@@ -116,7 +117,7 @@ bool Window::SetupShader(const std::filesystem::path& vertex_shader, const std::
 	float position[3]{ -2.0f, 9.0f, -1.0f };
 	float target[3]{ 4.0f, 0.0f, 4.0f };
 	raylib::Vector4 col = raylib::Color(WHITE).Normalize() ;
-	float color[4]{col.x/5, col.y/5, col.z/5, col.w/5};
+	float color[4]{col.x/2, col.y/2, col.z/2, col.w/2};
 	//float color[4]{ 0.2f, 0.2f, 0.2f, 0.9f };
 	float attenuation{ 1.0f };
 
@@ -125,6 +126,14 @@ bool Window::SetupShader(const std::filesystem::path& vertex_shader, const std::
 	shader.SetValue(positionLoc, position, SHADER_UNIFORM_VEC3);
 	shader.SetValue(targetLoc, target, SHADER_UNIFORM_VEC3);
 	shader.SetValue(colorLoc, color, SHADER_UNIFORM_VEC4);
+
+	int textureLoc = shader.GetLocation("texture0");
+	//raylib::TextureUnmanaged temp(raylib::Image::Checked(32, 32, 5, 5, GREEN, WHITE));
+	raylib::TextureUnmanaged temp(raylib::Image::Color(32, 32, GREEN));
+	shader.SetValue(textureLoc, &temp, SHADER_UNIFORM_SAMPLER2D);
+	cube.voxel->materials->maps->texture.id = temp.GetId();
+	cube.voxel->materials->shader = shader;
+
 
 
 	return shader.IsReady();

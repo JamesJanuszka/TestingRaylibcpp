@@ -1,4 +1,5 @@
 #pragma once
+
 #include"raylib-cpp.hpp"
 class Cube
 {
@@ -8,9 +9,12 @@ public:
 	virtual ~Cube();
 	void Draw();
 
+	raylib::Model* voxel;
+
 private:
 	raylib::Vector3 position;
 	raylib::Vector3 size;
 	raylib::Color colour;
+	
 };
 
